@@ -1,4 +1,3 @@
-
 import dotenv from 'dotenv';
 import logger from './logger';
 
@@ -16,7 +15,10 @@ const requiredEnvVars = [
 ];
 
 export const checkEnv = () => {
-  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+  const missingVars = requiredEnvVars.filter(varName => {
+    const value = process.env[varName];
+    return !value || value.trim() === '';
+  });
 
   if (missingVars.length > 0) {
     logger.error(`Missing required environment variables: ${missingVars.join(', ')}`);
