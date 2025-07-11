@@ -1,26 +1,26 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import {
-  getAllUpcomingWebinars,
-  createUpcomingWebinar,
-  getUpcomingWebinarById,
-  updateUpcomingWebinar,
-  deleteUpcomingWebinar,
+  getAllUpcomingWebinars as getAllUpcomingWebinarsService,
+  createUpcomingWebinar as createUpcomingWebinarService,
+  getUpcomingWebinarById as getUpcomingWebinarByIdService,
+  updateUpcomingWebinar as updateUpcomingWebinarService,
+  deleteUpcomingWebinar as deleteUpcomingWebinarService,
 } from '../services/upcomingWebinarService';
 
 // @desc    Get all upcoming webinars
 // @route   GET /api/upcoming-webinars
 // @access  Public
 const getUpcomingWebinars = asyncHandler(async (req: Request, res: Response) => {
-  const upcomingWebinars = await getAllUpcomingWebinars();
+  const upcomingWebinars = await getAllUpcomingWebinarsService();
   res.json(upcomingWebinars);
 });
 
 // @desc    Create a new upcoming webinar
 // @route   POST /api/upcoming-webinars
 // @access  Public
-const newUpcomingWebinar = asyncHandler(async (req: Request, res: Response) => {
-  const upcomingWebinar = await createUpcomingWebinar(req.body);
+const createUpcomingWebinar = asyncHandler(async (req: Request, res: Response) => {
+  const upcomingWebinar = await createUpcomingWebinarService(req.body);
   res.status(201).json(upcomingWebinar);
 });
 
@@ -28,7 +28,7 @@ const newUpcomingWebinar = asyncHandler(async (req: Request, res: Response) => {
 // @route   GET /api/upcoming-webinars/:id
 // @access  Public
 const getUpcomingWebinar = asyncHandler(async (req: Request, res: Response) => {
-  const upcomingWebinar = await getUpcomingWebinarById(req.params.id);
+  const upcomingWebinar = await getUpcomingWebinarByIdService(req.params.id);
   if (upcomingWebinar) {
     res.json(upcomingWebinar);
   } else {
@@ -40,8 +40,8 @@ const getUpcomingWebinar = asyncHandler(async (req: Request, res: Response) => {
 // @desc    Update an upcoming webinar
 // @route   PUT /api/upcoming-webinars/:id
 // @access  Public
-const updateWebinar = asyncHandler(async (req: Request, res: Response) => {
-  const upcomingWebinar = await updateUpcomingWebinar(req.params.id, req.body);
+const updateUpcomingWebinar = asyncHandler(async (req: Request, res: Response) => {
+  const upcomingWebinar = await updateUpcomingWebinarService(req.params.id, req.body);
   if (upcomingWebinar) {
     res.json(upcomingWebinar);
   } else {
@@ -53,8 +53,8 @@ const updateWebinar = asyncHandler(async (req: Request, res: Response) => {
 // @desc    Delete an upcoming webinar
 // @route   DELETE /api/upcoming-webinars/:id
 // @access  Public
-const deleteWebinar = asyncHandler(async (req: Request, res: Response) => {
-  const upcomingWebinar = await deleteUpcomingWebinar(req.params.id);
+const deleteUpcomingWebinar = asyncHandler(async (req: Request, res: Response) => {
+  const upcomingWebinar = await deleteUpcomingWebinarService(req.params.id);
   if (upcomingWebinar) {
     res.json({ message: 'Upcoming webinar removed' });
   } else {
@@ -63,4 +63,4 @@ const deleteWebinar = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { getUpcomingWebinars, newUpcomingWebinar, getUpcomingWebinar, updateWebinar, deleteWebinar };
+export { getUpcomingWebinars, createUpcomingWebinar, getUpcomingWebinar, updateUpcomingWebinar, deleteUpcomingWebinar };
