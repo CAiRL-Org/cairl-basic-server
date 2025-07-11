@@ -42,7 +42,5 @@ const getUsers = asyncHandler(async (req: Request, res: Response) => {
   res.json(users);
 });
 
-// @desc    Subscribe/Unsubscribe to newsletter
-// @route   PUT /api/users/newsletter
-// @access  Private
+
 export { authUser, registerUser, getUsers };

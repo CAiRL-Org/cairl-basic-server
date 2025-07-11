@@ -1,9 +1,9 @@
 import express from 'express';
-import { getUpcomingWebinars, newUpcomingWebinar, getUpcomingWebinar, updateWebinar, deleteWebinar } from '../controllers/upcomingWebinarController';
+import { getUpcomingWebinars, createUpcomingWebinar, getUpcomingWebinar, updateUpcomingWebinar, deleteUpcomingWebinar } from '../controllers/upcomingWebinarController';
 
 const router = express.Router();
 
-router.route('/').get(getUpcomingWebinars).post(newUpcomingWebinar);
-router.route('/:id').get(getUpcomingWebinar).put(updateWebinar).delete(deleteWebinar);
+router.route('/').get(getUpcomingWebinars).post(createUpcomingWebinar);
+router.route('/:id').get(getUpcomingWebinar).put(updateUpcomingWebinar).delete(deleteUpcomingWebinar);
 
 export default router;

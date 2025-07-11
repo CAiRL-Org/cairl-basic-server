@@ -1,4 +1,3 @@
-
 import nodemailer from 'nodemailer';
 import logger from './logger';
 
@@ -17,6 +16,10 @@ const initTransporter = async () => {
         pass: process.env.EMAIL_PASS,
       },
     });
+    logger.debug('Nodemailer production transporter auth:', {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS ? '********' : 'undefined',
+    });
   } else {
     const testAccount = await nodemailer.createTestAccount();
     transporter = nodemailer.createTransport({
@@ -27,6 +30,10 @@ const initTransporter = async () => {
         user: testAccount.user,
         pass: testAccount.pass,
       },
+    });
+    logger.debug('Nodemailer development transporter auth:', {
+      user: testAccount.user,
+      pass: testAccount.pass ? '********' : 'undefined',
     });
     logger.info('Test email account created', {
       user: testAccount.user,
