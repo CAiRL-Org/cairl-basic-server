@@ -23,8 +23,49 @@ app.use(
 );
 
 // Basic route
-app.get("/", (req, res) => {
-  res.send("API is running...");
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to CAiRL Server</title>
+      <style>
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background-color: #f0f2f5;
+        }
+        .container {
+          text-align: center;
+          padding: 40px;
+          background-color: #ffffff;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+          font-size: 2.5em;
+          color: #333;
+        }
+        p {
+          font-size: 1.2em;
+          color: #666;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Welcome to the CAiRL Server</h1>
+        <p>Your gateway to our services.</p>
+      </div>
+    </body>
+    </html>
+  `);
 });
 
 // User routes
