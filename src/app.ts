@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import logger from "./utils/logger";
 import userRoutes from "./routes/userRoutes";
@@ -9,7 +8,6 @@ import newsletterRoutes from "./routes/newsletterRoutes";
 import upcomingWebinarRoutes from "./routes/upcomingWebinarRoutes";
 import { notFound, errorHandler } from "./middleware/errorMiddleware";
 
-dotenv.config();
 
 const app = express();
 

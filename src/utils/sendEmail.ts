@@ -1,9 +1,6 @@
 
 import nodemailer from 'nodemailer';
 import logger from './logger';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 let transporter: nodemailer.Transporter;
 
