@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { checkEnv } from './utils/env';
+
 import logger from './utils/logger';
 
 const result = dotenv.config();
@@ -14,7 +14,7 @@ if (result.parsed) {
   logger.warn('.env file not found or is empty');
 }
 
-checkEnv();
+
 
 import app from "./app";
 import { connectDB } from "./config/mongodb";
