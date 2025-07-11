@@ -8,7 +8,6 @@ import newsletterRoutes from "./routes/newsletterRoutes";
 import upcomingWebinarRoutes from "./routes/upcomingWebinarRoutes";
 import { notFound, errorHandler } from "./middleware/errorMiddleware";
 
-
 const app = express();
 
 // Middleware
@@ -23,7 +22,7 @@ app.use(
 );
 
 // Basic route
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html lang="en">
