@@ -7,6 +7,7 @@ import webinarRoutes from "./routes/webinarRoutes";
 import newsletterRoutes from "./routes/newsletterRoutes";
 import upcomingWebinarRoutes from "./routes/upcomingWebinarRoutes";
 import { notFound, errorHandler } from "./middleware/errorMiddleware";
+import { setupSwagger } from "./config/swagger";
 
 const app = express();
 
@@ -78,12 +79,16 @@ app.get("/", (req, res) => {
           font-size: 1.2em;
           color: #666;
         }
+        .api-docs-link {
+          margin-top: 20px;
+        }
       </style>
     </head>
     <body>
       <div class="container">
         <h1>Welcome to the CAiRL Server</h1>
         <p>Your gateway to our services.</p>
+        <p class="api-docs-link">View the <a href="/api-docs">API Documentation</a>.</p>
       </div>
     </body>
     </html>
@@ -99,5 +104,7 @@ app.use("/api/upcoming-webinars", upcomingWebinarRoutes);
 // Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
+
+setupSwagger(app);
 
 export default app;
