@@ -101,10 +101,10 @@ app.use("/api/webinars", webinarRoutes);
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/upcoming-webinars", upcomingWebinarRoutes);
 
+setupSwagger(app);
+
 // Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
-
-setupSwagger(app);
 
 export default app;
