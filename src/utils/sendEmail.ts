@@ -7,18 +7,20 @@ const initTransporter = async () => {
   if (transporter) return;
 
   if (process.env.NODE_ENV === 'production') {
+    // For production, use Gmail with App Password instead of regular password
     transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: parseInt(process.env.EMAIL_PORT || '587', 10),
       secure: process.env.EMAIL_SECURE === 'true',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        // Use App Password instead of regular password for Gmail
+        pass: process.env.EMAIL_APP_PASSWORD || process.env.EMAIL_PASS,
       },
     });
     logger.debug('Nodemailer production transporter auth:', {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS ? '********' : 'undefined',
+      pass: process.env.EMAIL_APP_PASSWORD || process.env.EMAIL_PASS ? '********' : 'undefined',
     });
   } else {
     const testAccount = await nodemailer.createTestAccount();
@@ -39,6 +41,17 @@ const initTransporter = async () => {
       user: testAccount.user,
       pass: testAccount.pass,
       url: 'https://ethereal.email',
+    });
+  }
+
+  // Verify the connection configuration
+  try {
+    await transporter.verify();
+    logger.info('SMTP connection verified successfully');
+  } catch (error: any) {
+    logger.error('SMTP connection verification failed:', {
+      error: error.message,
+      stack: error.stack,
     });
   }
 };
