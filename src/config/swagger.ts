@@ -3,6 +3,10 @@ import swaggerUi from 'swagger-ui-express';
 import { Express } from 'express';
 import { swaggerAuth } from '../middleware/swaggerAuth';
 
+const apiFiles = process.env.NODE_ENV === 'production' 
+  ? ['./dist/routes/*.js'] 
+  : ['./src/routes/*.ts'];
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -31,7 +35,7 @@ const options = {
       },
     ],
   },
-  apis: ['./src/routes/*.ts'],
+  apis: apiFiles,
 };
 
 export const setupSwagger = (app: Express) => {
