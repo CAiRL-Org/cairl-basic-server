@@ -16,6 +16,8 @@ app.use(express.json());
 
 const allowedOrigins = [
   "https://cairl-modern-client.vercel.app",
+  "https://cairl.org",
+  "https://www.cairl.org",
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:5173",
